@@ -13,6 +13,7 @@ public class App {
 
     // private static ResponseTransformer Hello;
     public static void main(String[] args) {
+        port(getHerokuAssignedPort());
 
         staticFiles.location("/public");
 
@@ -90,7 +91,6 @@ public class App {
             return new ModelAndView(map, "greetedNames.handlebars");
         }, new HandlebarsTemplateEngine());
 
-        port(getHerokuAssignedPort());
     };
 
     private static String getTheMessage(String name, String language){
