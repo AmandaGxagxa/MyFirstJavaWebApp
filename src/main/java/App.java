@@ -33,38 +33,38 @@ public class App {
 
         post("/hello", (req, res) -> {
             Map<String, Object> map = new HashMap<>();
-
             // create the greeting message
-            String greeting = "Hello, " + req.queryParams("username").toUpperCase();
-            if(){
+            // String lang = req.queryParams("language");
+            String name = req.queryParams("username");
+            String language = req.queryParams("language");
+            if (name != "" && language !=null ){
+            String message = getTheMessage(name,language);
+             map.put("message", message);
+//             return getTheMessage(name,language);
+            }else{
 
             }
-           // String lang = req.queryParams("language");
-            String name = req.params("username");
-            String language = req.params("language");
-            //return getTheMessage(name, language);
-
-            if(!usersList.contains(req.queryParams("username").toUpperCase()) && ){
-                usersList.add(req.queryParams("username").toUpperCase());
+            if(!usersList.contains(name.toUpperCase())){
+                usersList.add(name.toUpperCase());
             }
 
            int userCount = usersList.size();
             // put it in the map which is passed to the template - the value will be merged into the template
 
-            map.put("greeting", greeting);
+
             map.put("username",usersList);
             map.put("userCount",userCount);
 
             return new ModelAndView(map, "hello.handlebars");
         }, new HandlebarsTemplateEngine());
 
-        get("/greeteNames", (req, res) -> {
+        get("/greeted", (req, res) -> {
             Map<String, Object> map = new HashMap<>();
             return new ModelAndView(map, "greetedNames.handlebars");
 
         }, new HandlebarsTemplateEngine());
 
-        post("/greeteNames", (req, res) -> {
+        post("/greeted", (req, res) -> {
             Map<String, Object> map = new HashMap<>();
 
             // create the greeting message

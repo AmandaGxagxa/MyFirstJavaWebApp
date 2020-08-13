@@ -14,14 +14,13 @@
         <form action="/hello" method="post" >
             <input type="text" name="username">
                 <div>
-
-                    <input type= "radio" name="language" value="English">
-                    <input type= "radio" name="language" value="IsiXhosa">
-                    <input type= "radio" name="language" value="Afrikaanse">
+                    <input type= "radio" name="language" value="English"><label>English</label>
+                    <input type= "radio" name="language" value="IsiXhosa"><label>IsiXhosa</label>
+                    <input type= "radio" name="language" value="Afrikaanse"><label>Afrikaanse</label>
                 </div>
             <input type="submit">
         </form>
-        {{greeting}}
+        {{message}}
         <div>
             <h2>Greeted Names!!!</h2>
             <ul>
