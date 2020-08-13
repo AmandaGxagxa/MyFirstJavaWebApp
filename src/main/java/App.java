@@ -10,16 +10,10 @@ import java.util.Map;
 import static spark.Spark.*;
 
 public class App {
-    static int getHerokuAssignedPort() {
-        ProcessBuilder processBuilder = new ProcessBuilder();
-        if (processBuilder.environment().get("PORT") != null) {
-            return Integer.parseInt(processBuilder.environment().get("PORT"));
-        }
-        return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
-    }
+
     // private static ResponseTransformer Hello;
     public static void main(String[] args) {
-        port(getHerokuAssignedPort());
+
         staticFiles.location("/public");
 
         List<String> usersList = new ArrayList<String>();
@@ -87,6 +81,8 @@ public class App {
             map.put("userCount",userCount);
             return new ModelAndView(map, "greetedNames.handlebars");
         }, new HandlebarsTemplateEngine());
+
+        port(getHerokuAssignedPort());
     };
 
     private static String getTheMessage(String name, String language){
@@ -107,6 +103,13 @@ public class App {
                 break;
         }
         return greetingMessage;
+    }
+    static int getHerokuAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
     }
 
 }
