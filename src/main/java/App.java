@@ -28,6 +28,8 @@ public class App {
         get("/", (req, res) -> {
 
             Map<String, Object> map = new HashMap<>();
+
+
             return new ModelAndView(map, "hello.handlebars");
 
         }, new HandlebarsTemplateEngine());
@@ -61,6 +63,14 @@ public class App {
 
         get("/greeted", (req, res) -> {
             Map<String, Object> map = new HashMap<>();
+            int userCount = usersList.size();
+            // put it in the map which is passed to the template - the value will be merged into the template
+
+
+            map.put("username",usersList);
+            map.put("userCount",userCount);
+
+
             return new ModelAndView(map, "greetedNames.handlebars");
 
         }, new HandlebarsTemplateEngine());
@@ -69,14 +79,12 @@ public class App {
             Map<String, Object> map = new HashMap<>();
 
             //create the greeting message
-            String greeting = "Hello, " + req.queryParams("username").toUpperCase();
-            if(!usersList.contains(req.queryParams("username").toUpperCase()) ){
-                usersList.add(req.queryParams("username").toUpperCase());
-            }
+//            String greeting = "Hello, " + req.queryParams("username").toUpperCase();
+//            if(!usersList.contains(req.queryParams("username").toUpperCase()) ){
+//                usersList.add(req.queryParams("username").toUpperCase());
+//            }
             int userCount = usersList.size();
             // put it in the map which is passed to the template - the value will be merged into the template
-
-
             map.put("username",usersList);
             map.put("userCount",userCount);
             return new ModelAndView(map, "greetedNames.handlebars");
