@@ -67,11 +67,11 @@ public class App {
         post("/greeted", (req, res) -> {
             Map<String, Object> map = new HashMap<>();
 
-            // create the greeting message
-//            String greeting = "Hello, " + req.queryParams("username").toUpperCase();
-//            if(!usersList.contains(req.queryParams("username").toUpperCase()) ){
-//                usersList.add(req.queryParams("username").toUpperCase());
-//            }
+            //create the greeting message
+            String greeting = "Hello, " + req.queryParams("username").toUpperCase();
+            if(!usersList.contains(req.queryParams("username").toUpperCase()) ){
+                usersList.add(req.queryParams("username").toUpperCase());
+            }
             int userCount = usersList.size();
             // put it in the map which is passed to the template - the value will be merged into the template
 
