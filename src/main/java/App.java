@@ -10,9 +10,16 @@ import java.util.Map;
 import static spark.Spark.*;
 
 public class App {
-   // private static ResponseTransformer Hello;
+    static int getHerokuAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
+    }
+    // private static ResponseTransformer Hello;
     public static void main(String[] args) {
-
+        port(getHerokuAssignedPort());
         staticFiles.location("/public");
 
         List<String> usersList = new ArrayList<String>();
@@ -24,14 +31,14 @@ public class App {
             return getTheMessage(name, language);
         });
 
-        get("/hello", (req, res) -> {
+        get("/", (req, res) -> {
 
             Map<String, Object> map = new HashMap<>();
             return new ModelAndView(map, "hello.handlebars");
 
         }, new HandlebarsTemplateEngine());
 
-        post("/hello", (req, res) -> {
+        post("/", (req, res) -> {
             Map<String, Object> map = new HashMap<>();
             // create the greeting message
             // String lang = req.queryParams("language");
