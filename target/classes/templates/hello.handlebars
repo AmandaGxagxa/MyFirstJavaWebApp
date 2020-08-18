@@ -5,32 +5,61 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <link rel="stylesheet" href="css/style.css">
         <title>Document</title>
     </head>
     <body>
         <h1>Greet me!</h1>
+        <div></div>
+        <div></div>
+        <br><br><br>
+        <form action="/greetings" method="post" >
+<!--            <input type="text" name="username">-->
+            <div class="form-group row">
 
-        <form action="/" method="post" >
-            <input type="text" name="username">
+                <div class="col">
+
+                </div>
+                <div class="col-5">
+                    <input type="text" class="form-control" name="username" placeholder="Enter name to be greeted!!!">
+                </div>
+                <div class="col">
+
+                </div>
+            </div>
+
                 <div>
                     <input type= "radio" name="language" value="English"><label>English</label>
                     <input type= "radio" name="language" value="IsiXhosa"><label>IsiXhosa</label>
                     <input type= "radio" name="language" value="Afrikaanse"><label>Afrikaanse</label>
                 </div>
-            <input type="submit">
-        </form>
-        {{message}}
-        <div>
-            <h2>Greeted Names!!!</h2>
-            <ul>
-                {{#each username}}
-                    <li>{{this}}</li>
-                {{/each}}
-            </ul>
-        </div>
+            <br><br>
+            <hr>
 
-        <div>greeted {{userCount}} times!!!</div>
+            <h4 action = "/greetings">{{message}}</h4>
+            <br><br>
+            <div class="row">
+                <div class="col">
+                    <a href="/greetings" ><button type="submit"  class="btn btn-success">Greet me!!!</button></a>
+                </div>
+                <div class="col">
+                    <a action="/greeted" ><button type="submit"  class="btn btn-success">Greeted Names</button></a>
+                </div>
+
+            </div>
+            </form>
+
+<!--        <div>-->
+<!--            <h2>Greeted Names!!!</h2>-->
+<!--            <ul>-->
+<!--                {{#each username}}-->
+<!--                    <li>{{this}}</li>-->
+<!--                {{/each}}-->
+<!--            </ul>-->
+<!--        </div>-->
+
+<!--        <div>greeted {{userCount}} times!!!</div>-->
 
     </body>
 </html>

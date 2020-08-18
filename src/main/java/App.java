@@ -27,15 +27,11 @@ public class App {
         });
 
         get("/", (req, res) -> {
-
             Map<String, Object> map = new HashMap<>();
+            return new ModelAndView(map, "index.handlebars");
+            }, new HandlebarsTemplateEngine());
 
-
-            return new ModelAndView(map, "hello.handlebars");
-
-        }, new HandlebarsTemplateEngine());
-
-        post("/", (req, res) -> {
+        post("/greetings", (req, res) -> {
             Map<String, Object> map = new HashMap<>();
             // create the greeting message
             // String lang = req.queryParams("language");
@@ -48,23 +44,25 @@ public class App {
             }else{
 
             }
+            return new ModelAndView(map, "hello.handlebars");
+        }, new HandlebarsTemplateEngine());
+
+        get("/greeting", (req, res) -> {
+            Map<String, Object> map = new HashMap<>();
+            int userCount = usersList.size();
+            String name = req.queryParams("username");
+            String language = req.queryParams("language");
+            if (name != "" && language !=null ){
+                String message = getTheMessage(name,language);
+                map.put("message", message);
+//             return getTheMessage(name,language);
+            }else{
+
+            }
             if(!usersList.contains(name.toUpperCase())){
                 usersList.add(name.toUpperCase());
             }
 
-           int userCount = usersList.size();
-            // put it in the map which is passed to the template - the value will be merged into the template
-
-
-            map.put("username",usersList);
-            map.put("userCount",userCount);
-
-            return new ModelAndView(map, "hello.handlebars");
-        }, new HandlebarsTemplateEngine());
-
-        get("/greeted", (req, res) -> {
-            Map<String, Object> map = new HashMap<>();
-            int userCount = usersList.size();
             // put it in the map which is passed to the template - the value will be merged into the template
 
 
